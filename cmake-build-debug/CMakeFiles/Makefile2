@@ -104,41 +104,41 @@ clean: CMakeFiles/dual_display_node.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/demo_topic_publisher_node.dir
+# Target rules for target CMakeFiles/chai3d_node.dir
 
 # All Build rule for target.
-CMakeFiles/demo_topic_publisher_node.dir/all: CMakeFiles/chai_generate_messages_cpp.dir/all
-CMakeFiles/demo_topic_publisher_node.dir/all: external/chai3d-3.2.0/CMakeFiles/chai3d.dir/all
-CMakeFiles/demo_topic_publisher_node.dir/all: glfw-master/src/CMakeFiles/glfw.dir/all
-	$(MAKE) -f CMakeFiles/demo_topic_publisher_node.dir/build.make CMakeFiles/demo_topic_publisher_node.dir/depend
-	$(MAKE) -f CMakeFiles/demo_topic_publisher_node.dir/build.make CMakeFiles/demo_topic_publisher_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=91 "Built target demo_topic_publisher_node"
-.PHONY : CMakeFiles/demo_topic_publisher_node.dir/all
+CMakeFiles/chai3d_node.dir/all: CMakeFiles/chai_generate_messages_cpp.dir/all
+CMakeFiles/chai3d_node.dir/all: external/chai3d-3.2.0/CMakeFiles/chai3d.dir/all
+CMakeFiles/chai3d_node.dir/all: glfw-master/src/CMakeFiles/glfw.dir/all
+	$(MAKE) -f CMakeFiles/chai3d_node.dir/build.make CMakeFiles/chai3d_node.dir/depend
+	$(MAKE) -f CMakeFiles/chai3d_node.dir/build.make CMakeFiles/chai3d_node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=88 "Built target chai3d_node"
+.PHONY : CMakeFiles/chai3d_node.dir/all
 
 # Include target in all.
-all: CMakeFiles/demo_topic_publisher_node.dir/all
+all: CMakeFiles/chai3d_node.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/demo_topic_publisher_node.dir/rule: cmake_check_build_system
+CMakeFiles/chai3d_node.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 92
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/demo_topic_publisher_node.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/chai3d_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/demo_topic_publisher_node.dir/rule
+.PHONY : CMakeFiles/chai3d_node.dir/rule
 
 # Convenience name for target.
-demo_topic_publisher_node: CMakeFiles/demo_topic_publisher_node.dir/rule
+chai3d_node: CMakeFiles/chai3d_node.dir/rule
 
-.PHONY : demo_topic_publisher_node
-
-# clean rule for target.
-CMakeFiles/demo_topic_publisher_node.dir/clean:
-	$(MAKE) -f CMakeFiles/demo_topic_publisher_node.dir/build.make CMakeFiles/demo_topic_publisher_node.dir/clean
-.PHONY : CMakeFiles/demo_topic_publisher_node.dir/clean
+.PHONY : chai3d_node
 
 # clean rule for target.
-clean: CMakeFiles/demo_topic_publisher_node.dir/clean
+CMakeFiles/chai3d_node.dir/clean:
+	$(MAKE) -f CMakeFiles/chai3d_node.dir/build.make CMakeFiles/chai3d_node.dir/clean
+.PHONY : CMakeFiles/chai3d_node.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/chai3d_node.dir/clean
 
 .PHONY : clean
 
@@ -151,12 +151,12 @@ CMakeFiles/chai_generate_messages_py.dir/all: CMakeFiles/_chai_generate_messages
 CMakeFiles/chai_generate_messages_py.dir/all: CMakeFiles/actionlib_msgs_generate_messages_py.dir/all
 	$(MAKE) -f CMakeFiles/chai_generate_messages_py.dir/build.make CMakeFiles/chai_generate_messages_py.dir/depend
 	$(MAKE) -f CMakeFiles/chai_generate_messages_py.dir/build.make CMakeFiles/chai_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num= "Built target chai_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=90 "Built target chai_generate_messages_py"
 .PHONY : CMakeFiles/chai_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chai_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/chai_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/chai_generate_messages_py.dir/rule
@@ -185,12 +185,12 @@ CMakeFiles/chai_generate_messages_nodejs.dir/all: CMakeFiles/_chai_generate_mess
 CMakeFiles/chai_generate_messages_nodejs.dir/all: CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f CMakeFiles/chai_generate_messages_nodejs.dir/build.make CMakeFiles/chai_generate_messages_nodejs.dir/depend
 	$(MAKE) -f CMakeFiles/chai_generate_messages_nodejs.dir/build.make CMakeFiles/chai_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=89 "Built target chai_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num= "Built target chai_generate_messages_nodejs"
 .PHONY : CMakeFiles/chai_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chai_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/chai_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/chai_generate_messages_nodejs.dir/rule
@@ -253,7 +253,7 @@ CMakeFiles/chai_generate_messages_eus.dir/all: CMakeFiles/std_msgs_generate_mess
 CMakeFiles/chai_generate_messages_eus.dir/all: CMakeFiles/actionlib_msgs_generate_messages_eus.dir/all
 	$(MAKE) -f CMakeFiles/chai_generate_messages_eus.dir/build.make CMakeFiles/chai_generate_messages_eus.dir/depend
 	$(MAKE) -f CMakeFiles/chai_generate_messages_eus.dir/build.make CMakeFiles/chai_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=88 "Built target chai_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=89 "Built target chai_generate_messages_eus"
 .PHONY : CMakeFiles/chai_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
@@ -484,7 +484,7 @@ CMakeFiles/chai_gennodejs.dir/all: CMakeFiles/chai_generate_messages_nodejs.dir/
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chai_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/chai_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/chai_gennodejs.dir/rule
@@ -1549,7 +1549,7 @@ CMakeFiles/chai_genpy.dir/all: CMakeFiles/chai_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chai_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/chai_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/chai_genpy.dir/rule
@@ -2173,7 +2173,7 @@ external/chai3d-3.2.0/utils/CLI/preinstall:
 external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/all: external/chai3d-3.2.0/CMakeFiles/chai3d.dir/all
 	$(MAKE) -f external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/build.make external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/depend
 	$(MAKE) -f external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/build.make external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=90 "Built target cimage"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num= "Built target cimage"
 .PHONY : external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/all
 
 # Include target in all.
@@ -2183,7 +2183,7 @@ all: external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/all
 
 # Build rule for subdir invocation for target.
 external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 88
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 87
 	$(MAKE) -f CMakeFiles/Makefile2 external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 .PHONY : external/chai3d-3.2.0/utils/CLI/CMakeFiles/cimage.dir/rule
@@ -2247,7 +2247,7 @@ clean: external/chai3d-3.2.0/utils/CLI/CMakeFiles/cfont.dir/clean
 external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/all: external/chai3d-3.2.0/CMakeFiles/chai3d.dir/all
 	$(MAKE) -f external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/build.make external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/depend
 	$(MAKE) -f external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/build.make external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num= "Built target cshader"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles --progress-num=91 "Built target cshader"
 .PHONY : external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/all
 
 # Include target in all.
@@ -2257,7 +2257,7 @@ all: external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/all
 
 # Build rule for subdir invocation for target.
 external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 87
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 88
 	$(MAKE) -f CMakeFiles/Makefile2 external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles 0
 .PHONY : external/chai3d-3.2.0/utils/CLI/CMakeFiles/cshader.dir/rule

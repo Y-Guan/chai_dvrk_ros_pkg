@@ -266,7 +266,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/dual_display_node.dir/DependInfo.cmake"
-  "CMakeFiles/demo_topic_publisher_node.dir/DependInfo.cmake"
+  "CMakeFiles/chai3d_node.dir/DependInfo.cmake"
   "CMakeFiles/chai_generate_messages_py.dir/DependInfo.cmake"
   "CMakeFiles/chai_generate_messages_nodejs.dir/DependInfo.cmake"
   "CMakeFiles/chai_generate_messages_lisp.dir/DependInfo.cmake"

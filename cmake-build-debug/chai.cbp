@@ -107,8 +107,8 @@
 					<DistClean command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="demo_topic_publisher_node">
-				<Option output="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/chai/demo_topic_publisher_node" prefix_auto="0" extension_auto="0"/>
+			<Target title="chai3d_node">
+				<Option output="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/chai/chai3d_node" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/chai"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -136,14 +136,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 demo_topic_publisher_node"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 chai3d_node"/>
 					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="demo_topic_publisher_node/fast">
-				<Option output="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/chai/demo_topic_publisher_node" prefix_auto="0" extension_auto="0"/>
+			<Target title="chai3d_node/fast">
+				<Option output="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/chai/chai3d_node" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/chai"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -171,7 +171,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 demo_topic_publisher_node/fast"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 chai3d_node/fast"/>
 					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j12 -f &quot;/home/yuan/chai_ws/src/chai/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -4296,7 +4296,7 @@
 			<Option target="glfw"/>
 		</Unit>
 		<Unit filename="/home/yuan/chai_ws/src/chai/src/demo_topic_publisher.cpp">
-			<Option target="demo_topic_publisher_node"/>
+			<Option target="chai3d_node"/>
 		</Unit>
 		<Unit filename="/home/yuan/chai_ws/src/chai/src/demo_topic_subscriber.cpp">
 			<Option target="demo_topic_subscriber_node"/>

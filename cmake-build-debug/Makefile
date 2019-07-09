@@ -181,17 +181,17 @@ dual_display_node/fast:
 .PHONY : dual_display_node/fast
 
 #=============================================================================
-# Target rules for targets named demo_topic_publisher_node
+# Target rules for targets named chai3d_node
 
 # Build rule for target.
-demo_topic_publisher_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 demo_topic_publisher_node
-.PHONY : demo_topic_publisher_node
+chai3d_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 chai3d_node
+.PHONY : chai3d_node
 
 # fast build rule for target.
-demo_topic_publisher_node/fast:
-	$(MAKE) -f CMakeFiles/demo_topic_publisher_node.dir/build.make CMakeFiles/demo_topic_publisher_node.dir/build
-.PHONY : demo_topic_publisher_node/fast
+chai3d_node/fast:
+	$(MAKE) -f CMakeFiles/chai3d_node.dir/build.make CMakeFiles/chai3d_node.dir/build
+.PHONY : chai3d_node/fast
 
 #=============================================================================
 # Target rules for targets named chai_generate_messages_py
@@ -1018,7 +1018,7 @@ src/demo_topic_publisher.o: src/demo_topic_publisher.cpp.o
 
 # target to build an object file
 src/demo_topic_publisher.cpp.o:
-	$(MAKE) -f CMakeFiles/demo_topic_publisher_node.dir/build.make CMakeFiles/demo_topic_publisher_node.dir/src/demo_topic_publisher.cpp.o
+	$(MAKE) -f CMakeFiles/chai3d_node.dir/build.make CMakeFiles/chai3d_node.dir/src/demo_topic_publisher.cpp.o
 .PHONY : src/demo_topic_publisher.cpp.o
 
 src/demo_topic_publisher.i: src/demo_topic_publisher.cpp.i
@@ -1027,7 +1027,7 @@ src/demo_topic_publisher.i: src/demo_topic_publisher.cpp.i
 
 # target to preprocess a source file
 src/demo_topic_publisher.cpp.i:
-	$(MAKE) -f CMakeFiles/demo_topic_publisher_node.dir/build.make CMakeFiles/demo_topic_publisher_node.dir/src/demo_topic_publisher.cpp.i
+	$(MAKE) -f CMakeFiles/chai3d_node.dir/build.make CMakeFiles/chai3d_node.dir/src/demo_topic_publisher.cpp.i
 .PHONY : src/demo_topic_publisher.cpp.i
 
 src/demo_topic_publisher.s: src/demo_topic_publisher.cpp.s
@@ -1036,7 +1036,7 @@ src/demo_topic_publisher.s: src/demo_topic_publisher.cpp.s
 
 # target to generate assembly for a file
 src/demo_topic_publisher.cpp.s:
-	$(MAKE) -f CMakeFiles/demo_topic_publisher_node.dir/build.make CMakeFiles/demo_topic_publisher_node.dir/src/demo_topic_publisher.cpp.s
+	$(MAKE) -f CMakeFiles/chai3d_node.dir/build.make CMakeFiles/chai3d_node.dir/src/demo_topic_publisher.cpp.s
 .PHONY : src/demo_topic_publisher.cpp.s
 
 src/demo_topic_subscriber.o: src/demo_topic_subscriber.cpp.o
@@ -1102,7 +1102,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... edit_cache"
 	@echo "... dual_display_node"
-	@echo "... demo_topic_publisher_node"
+	@echo "... chai3d_node"
 	@echo "... chai_generate_messages_py"
 	@echo "... chai_generate_messages_nodejs"
 	@echo "... chai_generate_messages_lisp"

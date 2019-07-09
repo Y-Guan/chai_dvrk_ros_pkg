@@ -92,6 +92,9 @@ string resourceRoot;
 // convert to resource path
 #define RESOURCE_PATH(p)    (char*)((resourceRoot+string(p)).c_str())
 
+// toggle when debugging in CLion / Or just ignore this macro
+#define DEBUG_MODE
+
 //------------------------------------------------------------------------------
 // DECLARED FUNCTIONS
 //------------------------------------------------------------------------------
@@ -142,9 +145,9 @@ int main(int argc, char* argv[])
 
     cout << endl;
     cout << "-----------------------------------" << endl;
-    cout << "CHAI3D" << endl;
+    cout << "CHAI3D ROS APPLICATION for dVRK MTM" << endl;
     cout << "Yuan Guan's Template" << endl;
-    cout << "Copyright 2003-2016" << endl;
+    cout << "University College London" << endl;
     cout << "-----------------------------------" << endl << endl << endl;
     cout << "Keyboard Options:" << endl << endl;
     cout << "[q] - Exit application" << endl;
@@ -152,55 +155,68 @@ int main(int argc, char* argv[])
 
     // parse first arg to try and locate resources
     resourceRoot = string(argv[0]).substr(0,string(argv[0]).find_last_of("/\\")+1);
-    std::cout << resourceRoot  << endl;
+    cout << "--------------------------------------------------------------------------------------" << endl;
+    std::cout << "Current resource root is : " << resourceRoot  << endl;
+    cout << "--------------------------------------------------------------------------------------" << endl << endl;
+
 
     //--------------------------------------------------------------------------
     // Init ROS Node
     //--------------------------------------------------------------------------
 
-     // init a node with name "demo_topic_publisher_node"
-     ros::init(argc, argv, "demo_topic_publisher_node");
-     // create a object for the node to communicate with ROS system
-     ros::NodeHandle node_obj;
+    // init a node with name "demo_topic_publisher_node"
+    ros::init(argc, argv, "chai3d_node");
+    // create a object for the node to communicate with ROS system
+    ros::NodeHandle node_obj;
 
-     /* ######################################################
-     Create a topic publisher:
-         - topic name: /dvrk/MTMR/state_joint_current
-         - message type: std::msgs::Int32
-         - queue size: 10 (set to high if sending rate is high)
-     #######################################################*/
-     ros::Publisher jointState_publisher = node_obj.advertise<sensor_msgs::JointState>("/dvrk/MTMR/state_joint_current",10);
+    /* ######################################################
+    Create a topic publisher:
+     - topic name: /dvrk/MTMR/state_joint_current
+     - message type: std::msgs::Int32
+     - queue size: 10 (set to high if sending rate is high)
+    #######################################################*/
+    ros::Publisher jointState_publisher = node_obj.advertise<sensor_msgs::JointState>("/dvrk/MTMR/state_joint_current",10);
 
-     // set the frequency of sending data
-     ros::Rate loop_rate(30);
+    // set the frequency of sending data
+    ros::Rate loop_rate(30);
 
-     // create message3
-     sensor_msgs::JointState msg;
-     msg.position.resize(8);
-     msg.name.resize(8);
-     msg.name[0] = "outer_yaw";
-     msg.name[1] = "shoulder_pitch";
-     msg.name[2] = "shoulder_pitch_parallel";
-     msg.name[3] = "elbow_pitch";
-     msg.name[4] = "wrist_platform";
-     msg.name[5] = "wrist_pitch";
-     msg.name[6] = "wrist_yaw";
-     msg.name[7] = "wrist_roll";
-     msg.position[0] = 0.0;
-     msg.position[1] = 0.0;
-     msg.position[2] = 0.0;
-     msg.position[3] = 0.0;
-     msg.position[4] = 0.0;
-     msg.position[5] = 0.0;
-     msg.position[6] = 0.0;
-     msg.position[7] = 0.0;
-     double increment0 = 0.01;
-     double increment1 = 0.01;
-     double increment2 = 0.01;
-     double increment3 = 0.01;
 
-     tf2_ros::Buffer tfBuffer;
-     tf2_ros::TransformListener tfListener(tfBuffer);
+    //--------------------------------------------------------------------------
+    // Init ROS msgs
+    //--------------------------------------------------------------------------
+
+    ///////////////////////////////////////////
+    // MTM joint state msg
+    ///////////////////////////////////////////
+    sensor_msgs::JointState msg;
+    msg.position.resize(8);
+    msg.name.resize(8);
+    msg.name[0] = "outer_yaw";
+    msg.name[1] = "shoulder_pitch";
+    msg.name[2] = "shoulder_pitch_parallel";
+    msg.name[3] = "elbow_pitch";
+    msg.name[4] = "wrist_platform";
+    msg.name[5] = "wrist_pitch";
+    msg.name[6] = "wrist_yaw";
+    msg.name[7] = "wrist_roll";
+    msg.position[0] = 0.0;
+    msg.position[1] = 0.0;
+    msg.position[2] = 0.0;
+    msg.position[3] = 0.0;
+    msg.position[4] = 0.0;
+    msg.position[5] = 0.0;
+    msg.position[6] = 0.0;
+    msg.position[7] = 0.0;
+    double increment0 = 0.01;
+    double increment1 = 0.01;
+    double increment2 = 0.01;
+    double increment3 = 0.01;
+
+    ///////////////////////////////////////////
+    // Init tf listener
+    ///////////////////////////////////////////
+    tf2_ros::Buffer tfBuffer;
+    tf2_ros::TransformListener tfListener(tfBuffer);
 
 
     //--------------------------------------------------------------------------
@@ -221,10 +237,8 @@ int main(int argc, char* argv[])
     // compute desired size of window
     const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
     int space = 10;
-    //int w = 0.5 * mode->height;
-    //int h = 0.5 * mode->height;
-    int w = 640;
-    int h = 480;
+    int w = 0.45 * mode->width;
+    int h = 1.0 * mode->height;
     int x1 = 0.5 * mode->width - w - space;
     int y1 = 0.5 * (mode->height - h);
     int x2 = 0.5 * mode->width + space;
@@ -313,6 +327,7 @@ int main(int argc, char* argv[])
     }
 #endif
 
+
     //--------------------------------------------------------------------------
     // WORLD
     //--------------------------------------------------------------------------
@@ -323,6 +338,7 @@ int main(int argc, char* argv[])
     // set the background color of the environment
     world->m_backgroundColor.setWhite();
 
+
     //--------------------------------------------------------------------------
     // CAMERA
     //--------------------------------------------------------------------------
@@ -332,9 +348,12 @@ int main(int argc, char* argv[])
     world->addChild(camera);
 
     // position and orient the camera
-    camera->set(cVector3d(0.0, -3.0, 1.0),    // camera position (eye)
-                cVector3d(0.5, 0.0, 1.0),    // lookat position (target)
-                cVector3d(0.0, 0.0, 1.0));   // direction of the (up) vector
+    cVector3d camera_look_at_position = cVector3d(0.5, 0.0, 1.0);
+    cVector3d camera_position = cVector3d(0.0, -3.0, 1.0);
+    cVector3d upward_direction = cVector3d(0.0, 0.0, 1.0);
+    camera->set(camera_position,             // camera position (eye)
+                camera_look_at_position,    // look-at position (target)
+                upward_direction);         // direction of the (up) vector
 
     // set the near and far clipping planes of the camera
     // anything in front or behind these clipping planes will not be rendered
@@ -344,7 +363,6 @@ int main(int argc, char* argv[])
     camera->setStereoMode(C_STEREO_PASSIVE_DUAL_DISPLAY);
 
     // set stereo eye separation and focal length (applies only if stereo is enabled)
-    //camera->setStereoEyeSeparation(0.03);
     camera->setStereoEyeSeparation(0.03);
     camera->setStereoFocalLength(3.0);
 
@@ -391,7 +409,7 @@ int main(int argc, char* argv[])
     tool->setHapticDevice(hapticDevice);
 
     // define the radius of the tool (sphere)
-    double toolRadius = 0.03;
+    double toolRadius = 0.02;
 
     // define a radius for the tool
     tool->setRadius(toolRadius);
@@ -399,7 +417,7 @@ int main(int argc, char* argv[])
     // hide the device sphere. only show proxy.
     //tool->setShowContactPoints(false, false);
 
-    // create a white cursor
+    // create a black cursor
     tool->m_hapticPoint->m_sphereProxy->m_material->setBlack();
 
     // map the physical workspace of the haptic device to a larger virtual workspace.
@@ -443,30 +461,33 @@ int main(int argc, char* argv[])
 
     // load texture map
     bool fileload;
-//    object0->m_texture = cTexture2d::create();
-//    //fileload = object0->m_texture->loadFromFile(RESOURCE_PATH("../external/chai3d-3.2.0/bin/resources/images/spheremap-3.jpg"));
-//    fileload = object0->m_texture->loadFromFile(RESOURCE_PATH("../../../src/chai/external/chai3d-3.2.0/bin/resources/images/spheremap-3.jpg"));
-//    //fileload = object0->m_texture->loadFromFile("../external/chai3d-3.2.0/bin/resources/images/spheremap-3.jpg");
-//    //std::cout << RESOURCE_PATH << endl;
-//    if (!fileload)
-//    {
-//        std::cout << "Error0 - Texture image failed to load correctly." << endl;
-//        #if defined(_MSVC)
-//        fileload = object0->m_texture->loadFromFile("../../../bin/resources/images/spheremap-3.jpg");
-//        //fileload = object0->m_texture->loadFromFile("../external/chai3d-3.2.0/bin/resources/images/spheremap-3.jpg");
-//        #endif
-//    }
-//    if (!fileload)
-//    {
-//        std::cout << "Error1 - Texture image failed to load correctly." << endl;
-//        close();
-//        return (-1);
-//    }
-//
-//    // set graphic properties
-//    object0->m_texture->setSphericalMappingEnabled(true);
-//    //object0->setUseTexture(true);
-//    object0->setUseTexture(true);
+    object0->m_texture = cTexture2d::create();
+    fileload = object0->m_texture->loadFromFile(RESOURCE_PATH("../../../src/chai/external/chai3d-3.2.0/bin/resources/images/spheremap-3.jpg"));
+    if (fileload) {
+        cout << "Texture map image Found" << endl;
+    }
+    else {
+        std::cout << "Error0 - Texture image failed to load correctly." << endl;
+#if defined(_MSVC)
+        fileload = object0->m_texture->loadFromFile("../../../src/chai/external/chai3d-3.2.0/bin/resources/images/spheremap-3.jpg");
+#endif
+#if defined(DEBUG_MODE)
+        fileload = object0->m_texture->loadFromFile(RESOURCE_PATH("../../../../external/chai3d-3.2.0/bin/resources/images/spheremap-3.jpg"));
+#endif
+        if (fileload) {
+            cout << "Texture map image Found" << endl;
+        }
+    }
+    if (!fileload)
+    {
+        std::cout << "Error1 - Texture image failed to load correctly." << endl;
+        close();
+        return (-1);
+    }
+
+    // set graphic properties
+    object0->m_texture->setSphericalMappingEnabled(true);
+    object0->setUseTexture(true);
     object0->m_material->setWhite();
 
     // get properties of haptic device
@@ -488,7 +509,6 @@ int main(int argc, char* argv[])
     // create a haptic viscous effect
     object0->createEffectViscosity();
 
-    cout << "here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl << endl;
 
     //--------------------------------------------------------------------------
     // WIDGETS
@@ -532,11 +552,8 @@ int main(int argc, char* argv[])
     windowSizeCallback1(window1, width1, height1);
     windowSizeCallback2(window2, width2, height2);
 
-    cout << "here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl << endl;
-
     // main graphic loop
-    //while ((!glfwWindowShouldClose(window1)) && (!glfwWindowShouldClose(window2)) && ros::ok())
-    while ((!glfwWindowShouldClose(window1)) && (!glfwWindowShouldClose(window2)) )
+    while ((!glfwWindowShouldClose(window1)) && (!glfwWindowShouldClose(window2)) && ros::ok())
     {
         ////////////////////////////////////////////////////////////////////////
         // RENDER WINDOW 1

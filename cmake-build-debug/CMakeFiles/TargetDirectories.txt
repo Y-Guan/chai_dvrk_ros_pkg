@@ -1,7 +1,7 @@
 /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/list_install_components.dir
 /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/dual_display_node.dir
-/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/demo_topic_publisher_node.dir
+/home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/chai3d_node.dir
 /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/chai_generate_messages_py.dir
 /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/chai_generate_messages_nodejs.dir
 /home/yuan/chai_ws/src/chai/cmake-build-debug/CMakeFiles/chai_generate_messages_lisp.dir

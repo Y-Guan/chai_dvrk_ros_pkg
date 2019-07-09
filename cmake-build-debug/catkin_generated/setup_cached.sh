@@ -11,5 +11,5 @@ export CMAKE_PREFIX_PATH="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel:$C
 export LD_LIBRARY_PATH="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PYTHONPATH="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib/python2.7/dist-packages:$PYTHONPATH"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/share/common-lisp"
 export ROS_PACKAGE_PATH="/home/yuan/chai_ws/src/chai:$ROS_PACKAGE_PATH"
