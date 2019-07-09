@@ -1,0 +1,8 @@
+prefix=/home/yuan/chai_ws/src/chai/cmake-build-debug/devel
+
+Name: chai
+Description: Description of chai
+Version: 0.0.0
+Cflags: -I/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/include -I/home/yuan/chai_ws/src/chai/include
+Libs: -L/home/yuan/chai_ws/src/chai/cmake-build-debug/devel/lib 
+Requires: geometry_msgs roscpp rospy std_msgs actionlib actionlib_msgs message_runtime

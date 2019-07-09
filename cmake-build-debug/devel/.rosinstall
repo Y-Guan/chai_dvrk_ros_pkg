@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/yuan/chai_ws/src/chai/cmake-build-debug/devel/setup.sh

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -std=c++11  -g  -shared -Wl,-soname,libgtest.so -o libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/yuan/chai_ws/src/chai/cmake-build-debug/gtest/gtest/src -Wl,-rpath,/home/yuan/chai_ws/src/chai/cmake-build-debug/gtest/gtest/src -lpthread 
