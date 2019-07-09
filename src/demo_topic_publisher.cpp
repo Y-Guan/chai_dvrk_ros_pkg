@@ -1,3 +1,6 @@
+//-------------------------------------------------------------------------------
+// Include all the libraries
+//-------------------------------------------------------------------------------
 #include "ros/ros.h"
 #include "std_msgs/Int32.h"
 #include "geometry_msgs/Vector3.h"
@@ -93,12 +96,11 @@ string resourceRoot;
 // DECLARED FUNCTIONS
 //------------------------------------------------------------------------------
 
-// callback when tf
+// callback for tf listener
 void tf_position_cb(const geometry_msgs::Vector3::ConstPtr & msg);
 
 // callback when the window1 display is resized
 void windowSizeCallback1(GLFWwindow* a_window, int a_width, int a_height);
-
 // callback when the window2 display is resized
 void windowSizeCallback2(GLFWwindow* a_window, int a_width, int a_height);
 
@@ -110,7 +112,6 @@ void keyCallback(GLFWwindow* a_window, int a_key, int a_scancode, int a_action, 
 
 // this function renders the scene1
 void updateGraphics1(void);
-
 // this function renders the scene2
 void updateGraphics2(void);
 
@@ -127,9 +128,13 @@ void close(void);
 
 int main(int argc, char* argv[])
 {
-
+    //--------------------------------------------------------------------------
+    // Get all the arguments
+    //--------------------------------------------------------------------------
     printf("argc = %d\n", argc);
-    printf("argv = %s\n", argv[0]);
+    for (int i = 0; i < argc; ++i) {
+        printf("argv[%d] = %s\n", i, argv[0]);
+    }
 
     //--------------------------------------------------------------------------
     // INITIALIZATION
