@@ -4,9 +4,12 @@
 #include "ros/ros.h"
 #include "std_msgs/Int32.h"
 #include "geometry_msgs/Vector3.h"
+#include "geometry_msgs/PoseStamped.h"
 #include "chai/demo_msg.h"
 #include "sensor_msgs/JointState.h"
 #include "tf2_ros/transform_listener.h"
+#include "tf/tf.h"
+#include "tf/LinearMath/Matrix3x3.h"
 #include <iostream>
 #include <chai3d.h>
 #include <stdlib.h>
@@ -23,6 +26,7 @@ using namespace std;
 //------------------------------------------------------------------------------
 
 // a world that contains all objects of the virtual environment
+//cWorld* world;
 cWorld* world;
 
 // a camera to render the world in the window display
@@ -102,6 +106,8 @@ string resourceRoot;
 // callback for tf listener
 void tf_position_cb(const geometry_msgs::Vector3::ConstPtr & msg);
 
+void position_subscriber_cb(const geometry_msgs::PoseStampedConstPtr &msg);
+
 // callback when the window1 display is resized
 void windowSizeCallback1(GLFWwindow* a_window, int a_width, int a_height);
 // callback when the window2 display is resized
@@ -178,7 +184,15 @@ int main(int argc, char* argv[])
     ros::Publisher jointState_publisher = node_obj.advertise<sensor_msgs::JointState>("/dvrk/MTMR/state_joint_current",10);
 
     // set the frequency of sending data
-    ros::Rate loop_rate(30);
+    ros::Rate loop_rate(60);
+
+    /* ######################################################
+    Create a topic publisher:
+     - topic name: /dvrk/MTMR/position_cartesian_current
+     - message type: geometry_msgs::PoseStampedConstPtr
+     - queue size: 10 (set to high if sending rate is high)
+    #######################################################*/
+    ros::Subscriber position_subscriber = node_obj.subscribe("/dvrk/MTMR/position_cartesian_current", 10, position_subscriber_cb);
 
 
     //--------------------------------------------------------------------------
@@ -218,6 +232,10 @@ int main(int argc, char* argv[])
     tf2_ros::Buffer tfBuffer;
     tf2_ros::TransformListener tfListener(tfBuffer);
 
+    ///////////////////////////////////////////
+    // Init msg buffers
+    ///////////////////////////////////////////
+    geometry_msgs::PoseStamped cur_pose, pre_pose;
 
     //--------------------------------------------------------------------------
     // OPEN GL - WINDOW DISPLAY
@@ -238,7 +256,7 @@ int main(int argc, char* argv[])
     const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
     int space = 10;
     int w = 0.45 * mode->width;
-    int h = 1.0 * mode->height;
+    int h = 0.6 * mode->height;
     int x1 = 0.5 * mode->width - w - space;
     int y1 = 0.5 * (mode->height - h);
     int x2 = 0.5 * mode->width + space;
@@ -348,22 +366,22 @@ int main(int argc, char* argv[])
     world->addChild(camera);
 
     // position and orient the camera
-    cVector3d camera_look_at_position = cVector3d(0.5, 0.0, 1.0);
-    cVector3d camera_position = cVector3d(0.0, -3.0, 1.0);
-    cVector3d upward_direction = cVector3d(0.0, 0.0, 1.0);
+    cVector3d camera_look_at_position(0.5, 0.0, 1.0);
+    cVector3d camera_position(0.0, -3.0, 1.0);
+    cVector3d upward_direction(0.0, 0.0, 1.0);
     camera->set(camera_position,             // camera position (eye)
                 camera_look_at_position,    // look-at position (target)
                 upward_direction);         // direction of the (up) vector
 
     // set the near and far clipping planes of the camera
     // anything in front or behind these clipping planes will not be rendered
-    camera->setClippingPlanes(0.01, 100);
+    camera->setClippingPlanes(0.01, 10);
 
     // set stereo mode
     camera->setStereoMode(C_STEREO_PASSIVE_DUAL_DISPLAY);
 
     // set stereo eye separation and focal length (applies only if stereo is enabled)
-    camera->setStereoEyeSeparation(0.03);
+    camera->setStereoEyeSeparation(0.065);
     camera->setStereoFocalLength(3.0);
 
     //--------------------------------------------------------------------------
@@ -406,7 +424,7 @@ int main(int argc, char* argv[])
     world->addChild(tool);
 
     // connect the haptic device to the virtual tool
-    tool->setHapticDevice(hapticDevice);
+    //tool->setHapticDevice(hapticDevice);
 
     // define the radius of the tool (sphere)
     double toolRadius = 0.02;
@@ -428,8 +446,12 @@ int main(int argc, char* argv[])
     // the tool is located inside an object for instance.
     tool->setWaitForSmallForce(true);
 
+    tool->setLocalPos(cVector3d(0.5, 0.0, 0.5));
+
     // start the haptic tool
     tool->start();
+
+    tool->setLocalPos(cVector3d(0.5, 0.0, 0.5));
 
     //--------------------------------------------------------------------------
     // CREATE OBJECTS
@@ -613,14 +635,13 @@ int main(int argc, char* argv[])
         }
 
         //publish
-        jointState_publisher.publish(msg);
+//        jointState_publisher.publish(msg);
 
         //ros::Subscriber tf_position_sub = node_obj.subscribe<geometry_msgs::Vector3>("/tf/transforms[7]/transform/translation", 10, tf_position_cb);
         geometry_msgs::TransformStamped T;
 
         try
         {
-            //T = tfBuffer.lookupTransform("world", "link6", ros::Time(0));
             T = tfBuffer.lookupTransform("world", "MTMR_wrist_roll_link", ros::Time(0));
         }
         catch (tf2::TransformException &ex)
@@ -644,7 +665,6 @@ int main(int argc, char* argv[])
         //delay to achieve desired publishing rate
         loop_rate.sleep();
 
-
     }
 
     // close windows
@@ -659,7 +679,7 @@ int main(int argc, char* argv[])
 }
 
 //------------------------------------------------------------------------------
-// object movement functions
+// msg callbacks
 //------------------------------------------------------------------------------
 void tf_position_cb(const geometry_msgs::Vector3::ConstPtr & msg)
 {
@@ -669,6 +689,20 @@ void tf_position_cb(const geometry_msgs::Vector3::ConstPtr & msg)
     object0_pos(2) = msg->y;
     cout << object0_pos << endl;
     object0->setLocalPos(object0_pos(0),object0_pos(1),object0_pos(2));
+
+}
+
+void position_subscriber_cb(const geometry_msgs::PoseStampedConstPtr &msg){
+    geometry_msgs::PoseStamped cur_pose = *msg;
+
+    tool->setDeviceGlobalPos(cVector3d(cur_pose.pose.position.x, cur_pose.pose.position.x, cur_pose.pose.position.x));
+
+    cout << "++++Robot position get++++ \n" << endl;
+    cout << "current Cart position is : \n" << endl;
+    cout << "       x : " << cur_pose.pose.position.x << "\n" << endl;
+    cout << "       y : " << cur_pose.pose.position.y << "\n" << endl;
+    cout << "       z : " << cur_pose.pose.position.z << "\n" << endl;
+    cout << "-------------------------------------" << endl;
 
 }
 
@@ -840,13 +874,15 @@ void updateHaptics(void)
         world->computeGlobalPositions(true);
 
         // update position and orientation of tool
-        tool->updateFromDevice();
+        //tool->updateFromDevice();
+
+        //tool->setDeviceGlobalPos(cVector3d(0.5, 0.0, 0.5));
 
         // compute interaction forces
         tool->computeInteractionForces();
 
         // send forces to haptic device
-        tool->applyToDevice();
+        //tool->applyToDevice();
     }
 
     // exit haptics thread
