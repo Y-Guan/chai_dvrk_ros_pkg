@@ -24,8 +24,39 @@ find_package(CHAI3D REQUIRED)
 set (DHD_LIBRARY_DIRS ${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/external/DHD/lib/lin-x86_64/)
 link_directories (${DHD_LIBRARY_DIRS})
 
+add_definitions (-DLINUX)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -march=native -Wno-deprecated -std=c++0x")
+set (CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fPIC -march=native -Wno-deprecated")
+
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/glfw-master)
+#add_subdirectory (${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/extras/GLFW)
+
+#find_package(GLFW REQUIRED)
+#set (GLFW_LIBRARY_DIRS ${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/extras/GLFW/lib/release/lin-x86_64-cc/)
+#link_directories (${GLFW_LIBRARY_DIRS})
+
 include_directories(${PROJECT_SOURCE_DIR}/glfw-master/include)
+
+
+
+#add_subdirectory(${PROJECT_SOURCE_DIR}/ODE)
+#include_directories(${PROJECT_SOURCE_DIR}/ODE/external/ODE/include)
+
+
+
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/modules/ODE)
+find_package(CHAI3D-ODE REQUIRED)
+include_directories(${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/modules/ODE/external/ODE/include)
+
+include_directories (${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/modules/ODE/src)
+include_directories (${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/modules/ODE/external/ODE/ode/src)
+include_directories (${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/modules/ODE/external/ODE/ode/src/joints)
+include_directories (${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/modules/ODE/external/ODE/OPCODE)
+include_directories (${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/modules/ODE/external/ODE/OPCODE/Ice)
+
+
+
 
 
 #add_subdirectory(${PROJECT_SOURCE_DIR}/external/chai3d-3.2.0/extras/GLFW)
@@ -132,10 +163,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
+  #INCLUDE_DIRS include
 #  LIBRARIES chai
   CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs actionlib actionlib_msgs message_runtime
-#  DEPENDS system_lib
+  #DEPENDS system_lib CHAI3D-ODE
 )
 ###########
 ## Build ##
@@ -146,6 +177,8 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${CHAI3D_INCLUDE_DIRS}
+  ${CHAI3D-ODE_INCLUDE_DIRS}
+  #${GLFW_INCLUDE_DIRS}
   ${CHAI3D_SOURCE_DIR}
   include
 )
@@ -183,24 +216,55 @@ set(SOURCES
         src/demo_topic_publisher.cpp
         #include/chai/chai.h
         )
- 
+
+#add_definitions(${CHAI3D-ODE_DEFINITIONS})
+
 add_executable(demo_topic_subscriber_node src/demo_topic_subscriber.cpp)
 add_dependencies(demo_topic_subscriber_node chai_generate_messages_cpp)
 target_link_libraries(demo_topic_subscriber_node ${catkin_LIBRARIES})
 target_link_libraries(demo_topic_subscriber_node ${CHAI3D_LIBRARIES})
 
-#add_executable(demo_topic_publisher_node ${SOURCES})
+
 add_executable(chai3d_node src/demo_topic_publisher.cpp)
 add_dependencies(chai3d_node chai_generate_messages_cpp)
 target_link_libraries(chai3d_node ${catkin_LIBRARIES})
 target_link_libraries(chai3d_node ${CHAI3D_LIBRARIES})
 target_link_libraries(chai3d_node glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+target_link_libraries(chai3d_node ${CHAI3D-ODE_LIBRARIES})
+
+add_executable(ODE_node src/ODE_node.cpp)
+add_dependencies(ODE_node chai_generate_messages_cpp)
+target_link_libraries(ODE_node ${catkin_LIBRARIES})
+target_link_libraries(ODE_node ${CHAI3D_LIBRARIES})
+target_link_libraries(ODE_node glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+target_link_libraries(ODE_node ${CHAI3D-ODE_LIBRARIES})
+
+add_executable(ODE_test_node src/ODE_test_node.cpp)
+add_dependencies(ODE_test_node chai_generate_messages_cpp)
+target_link_libraries(ODE_test_node ${catkin_LIBRARIES})
+target_link_libraries(ODE_test_node ${CHAI3D_LIBRARIES})
+target_link_libraries(ODE_test_node glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+target_link_libraries(ODE_test_node ${CHAI3D-ODE_LIBRARIES})
+
+add_executable(ODE_app_node src/ODE_node.cpp)
+add_dependencies(ODE_app_node chai_generate_messages_cpp)
+target_link_libraries(ODE_app_node ${catkin_LIBRARIES})
+target_link_libraries(ODE_app_node ${CHAI3D_LIBRARIES})
+target_link_libraries(ODE_app_node glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+target_link_libraries(ODE_app_node ${CHAI3D-ODE_LIBRARIES})
 
 add_executable(dual_display_node src/dual_display.cpp)
 add_dependencies(dual_display_node chai_generate_messages_cpp)
 target_link_libraries(dual_display_node ${catkin_LIBRARIES})
 target_link_libraries(dual_display_node ${CHAI3D_LIBRARIES})
 target_link_libraries(dual_display_node glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+
+add_executable(dvrk_original_node src/dvrk_original.cpp)
+add_dependencies(dvrk_original_node chai_generate_messages_cpp)
+target_link_libraries(dvrk_original_node ${catkin_LIBRARIES})
+target_link_libraries(dvrk_original_node ${CHAI3D_LIBRARIES})
+target_link_libraries(dvrk_original_node glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+target_link_libraries(dvrk_original_node ${CHAI3D-ODE_LIBRARIES})
 
 #############
 ## Install ##
